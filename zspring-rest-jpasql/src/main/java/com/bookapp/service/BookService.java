@@ -11,7 +11,7 @@ public interface BookService {
 		BookDTO getById(int bookid);
 		List<Book> getAll();
 		List<Book> getBooksByAuthor(String author);
-		List<Book> getBooksByCategory(String category);
+		List<Book> getBooksBydesc(String desc);
 		void updateBook(Book book);
 		void deleteBook(int bookid);
 }

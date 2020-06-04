@@ -24,11 +24,11 @@ public class BookServiceImpl implements BookService {
 	@Transactional
 	public BookDTO getById(int bookid) {
 		Book book = bookRepository.getOne(bookid);
-		BookDTO book1= new BookDTO(book.getBookId(),book.getTitle(),book.getAuthor(),book.getCategory());
+		BookDTO book1= new BookDTO(book.getBookId(),book.getTitle(),book.getAuthor());
 		System.out.println(book1);
 		//return bookRepository.findById(bookid).orElse(new Book());
 		return book1;
-	}
+	}  
 
 	@Override
 	public List<Book> getAll() {
@@ -41,11 +41,7 @@ public class BookServiceImpl implements BookService {
 		return bookList;
 	}
 
-	@Override
-	public List<Book> getBooksByCategory(String category) {
-		List<Book> bookList = bookRepository.readByCategory(category);
-		return bookList;
-	}
+	
 
 	@Override
 	public void updateBook(Book book) {
@@ -55,6 +51,11 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void deleteBook(int bookid) {
 		bookRepository.deleteById(bookid);
+	}
+	@Override
+	public List<Book> getBooksBydesc(String desc) {
+		//return bookRepository.findByBarcodeDescription(desc);
+		return bookRepository.findByDesc(desc);
 	}
 
 	

@@ -1,6 +1,5 @@
 package com.bookapp.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,28 +10,27 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
-public class BookDTO {
-	private Integer bookId;
-	private String title;
-	private String author;
+@Entity
+@AllArgsConstructor
+public class BarCode {
+	@Id
+	@GeneratedValue(generator = "bar_sequence",strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "bar_sequence",sequenceName ="bar_seq" )
+	int barId;
+	int ISBNnumber; 
+	String description; // fiction ,
+	public BarCode(int iSBNnumber, String description) {
+		super();
+		ISBNnumber = iSBNnumber;
+		this.description = description;
+	}
 	
 	
-	
-
-	
-	
-
 }
-
-
-
-
