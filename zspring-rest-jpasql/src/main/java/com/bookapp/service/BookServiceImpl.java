@@ -1,12 +1,14 @@
 package com.bookapp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bookapp.dao.BookRepository;
+import com.bookapp.exception.BookNotFoundException;
 import com.bookapp.models.Book;
 import com.bookapp.models.BookDTO;
 @Service
@@ -23,11 +25,14 @@ public class BookServiceImpl implements BookService {
 	@Override
 	@Transactional
 	public BookDTO getById(int bookid) {
-		Book book = bookRepository.getOne(bookid);
-		BookDTO book1= new BookDTO(book.getBookId(),book.getTitle(),book.getAuthor());
-		System.out.println(book1);
-		//return bookRepository.findById(bookid).orElse(new Book());
-		return book1;
+		Optional<Book> optional = bookRepository.findById(bookid);
+		if(optional.isPresent()) {		
+			Book book = optional.get();
+			BookDTO book1= new BookDTO(book.getBookId(),book.getTitle(),book.getAuthor());
+			return book1;
+		}else {
+			throw new BookNotFoundException("Invalid Id");
+		}
 	}  
 
 	@Override
@@ -56,6 +61,15 @@ public class BookServiceImpl implements BookService {
 	public List<Book> getBooksBydesc(String desc) {
 		//return bookRepository.findByBarcodeDescription(desc);
 		return bookRepository.findByDesc(desc);
+	}
+	@Override
+	public void updatePartBook(int bookid, String author) {
+		bookRepository.updatePartBook(bookid,author);
+		
+	}
+	@Override
+	public List<Book> getByPublisherAndDesc(String pub, String desc) {
+		return bookRepository.getByPubAndDesc(pub,desc);
 	}
 
 	

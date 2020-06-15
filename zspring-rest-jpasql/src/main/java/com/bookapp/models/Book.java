@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,6 +38,7 @@ public class Book {
 	@Column(name="author_name")
 	private String author;
 	double price;
+	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "book_id")
 	private Set<Edition> editions;
@@ -43,6 +46,7 @@ public class Book {
 			  joinColumns = @JoinColumn(name="book_id"),
 			  inverseJoinColumns = @JoinColumn(name="publisher_id")
 			)
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Publisher> publisher;
 	

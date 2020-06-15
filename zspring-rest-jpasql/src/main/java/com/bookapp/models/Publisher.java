@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +26,7 @@ public class Publisher {
 	private Integer publisherId;
 	private String publisherName;
 	@ManyToMany(mappedBy = "publisher")
+	@JsonIgnore
 	private Set<Book> bookList;
 	public Publisher(String publisherName) {
 		super();
