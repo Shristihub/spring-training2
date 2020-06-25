@@ -1,4 +1,4 @@
 server:
-  port: 8086
-#spring:#  application:#    name: ORDER-SERVICE  
+  port: 8087
+spring:  application:    name: ORDER-SERVICE  
 eureka:  client:    service-url:      default-zone: http://localhost:8761/

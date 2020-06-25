@@ -26,13 +26,6 @@ public class MyappOrderServiceApplication {
 @LoadBalanced
 public RestTemplate restTemplate() {
 	RestTemplate restTemplate = new RestTemplate();
-	List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();        
-	//Add the Jackson Message converter
-	MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-
-	converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));        
-	messageConverters.add(converter);  
-	restTemplate.setMessageConverters(messageConverters); 
 	return restTemplate;
 }
 }
