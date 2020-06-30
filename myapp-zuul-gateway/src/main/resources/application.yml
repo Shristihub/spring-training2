@@ -1,0 +1,18 @@
+server:
+  port: 9001
+spring:  application:    name: ZUUL-API  
+eureka:  client:   service-url:      default-zone: http://localhost:8761/
+
+#zuul.prefix.routes.<client-service>
+zuul:
+  prefix: /online-book-api
+  routes:
+   BOOK-SERVICE: 
+    path: /books/**
+    service-id: BOOK-SERVICE
+   ORDER-SERVICE:  
+    path: /orders/**
+    service-id: ORDER-SERVICE
+   RIBBON-SERVICE: 
+    path: /ribbon/**
+    service-id: RIBBON-SERVICE
